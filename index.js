@@ -6,7 +6,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 app.use(express.json()); // POST 요청에서 JSON 본문을 처리하도록 설정
-app.use(cors()); // 모든 출처 허용 (개발용)
+// app.use(cors()); // 모든 출처 허용 (개발용)
+app.use(cors({
+  origin: ["https://your-frontend.vercel.app"], // 정확한 Vercel 주소 넣기
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
 
 
 const db = mysql.createConnection({
