@@ -19,9 +19,9 @@ const db = mysql.createConnection({
     // password: "1234",
     // database: "work"
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    user: process.env.DB_USER || 'myuser',
+    password: process.env.DB_PASSWORD || 'mypassword',
+    database: process.env.DB_NAME || 'work'
 });
 // MySQL 연결 확인
 db.connect((err) => {
