@@ -7,12 +7,12 @@ services:
     autoDeploy: true
     envVars:
       - key: MYSQL_ROOT_PASSWORD
-        value: my-secret-pw
+        value: 1234
       - key: MYSQL_DATABASE
-        value: testdb
+        value: work
       - key: MYSQL_USER
-        value: testuser
+        value: root
       - key: MYSQL_PASSWORD
-        value: testpass
+        value: 1234
     ports:
       - 3306
