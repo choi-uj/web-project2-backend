@@ -6,14 +6,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 app.use(express.json()); // POST 요청에서 JSON 본문을 처리하도록 설정
-const allowedOrigins = [
-  "http://localhost:5173", // 로컬 개발용
-  "https://web-project2-frontend.vercel.app/" // Vercel에 배포된 프론트 주소
-];
-
 const corsOptions = {
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "DELETE", "PUT"],
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 };
 app.use(cors(corsOptions));
