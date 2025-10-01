@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: mysql-docker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: my-secret-pw
+      - key: MYSQL_DATABASE
+        value: testdb
+      - key: MYSQL_USER
+        value: testuser
+      - key: MYSQL_PASSWORD
+        value: testpass
+    ports:
+      - 3306
