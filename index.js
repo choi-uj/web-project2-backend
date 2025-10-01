@@ -13,18 +13,17 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const db = mysql.createConnection({
-    // host: "localhost",
-    // user: "root",
-    // password: "1234",
-    // database: "work"
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,  // 동시에 최대 10개 연결 허용
+  queueLimit: 0
 });
 // MySQL 연결 확인
-db.connect((err) => {
+pool.query(sql, params, (err, results) => {
     if (err) {
         console.error("MySQL 연결 실패:", err);
         return;
