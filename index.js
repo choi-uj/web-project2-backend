@@ -1,7 +1,9 @@
 import express from "express";
 import mysql from "mysql2";
 import cors from "cors";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 app.use(express.json()); // POST 요청에서 JSON 본문을 처리하도록 설정
 app.use(cors()); // 모든 출처 허용 (개발용)
@@ -50,13 +52,22 @@ app.post("/web2_full", (req, res)=>{
     const values = [req.body.username, req.body.password, req.body.title, req.body.content];
 
     db.query( sql, values, (err, data)=>{
-        if(err) return res.json(err);
-        return res.json(data);
+        if(err) {
+            // return res.json(err);
+            console.error("삽입 에러:", err);
+            return res.status(500).json({ error: "DB 삽입 실패", detail: err });
+        }
+        // return res.json(data);
+        return res.status(201).json({ message: "작성 완료", data });
     });
 });
 
 // 서버 실행
-app.listen(8500, () => {
-    console.log("백앤드 연결 성공!!");
+const PORT = process.env.PORT || 8500;
+// app.listen(8500, () => {
+//     console.log("백앤드 연결 성공!!");
+// });
+app.listen(PORT, () => {
+  console.log(`서버 실행 중! 포트: ${PORT}`);
 });
 
