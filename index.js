@@ -14,14 +14,11 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const db = mysql.createConnection({
-    // host: "localhost",
-    // user: "root",
-    // password: "1234",
-    // database: "work"
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER || 'myuser',
-    password: process.env.DB_PASSWORD || 'mypassword',
-    database: process.env.DB_NAME || 'work'
+    host: process.env.DB_HOST || 'localhost' ,
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '1234',
+    database: process.env.DB_NAME || 'work',
+    port: process.env.DB_PORT || 3306
 });
 // MySQL 연결 확인
 db.connect((err) => {
